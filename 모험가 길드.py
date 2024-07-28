@@ -6,7 +6,7 @@ count = 0
 while True:
     if lst == []:
         break
-    elif lst[0] < len(lst):
+    elif lst[0] > len(lst):
         del lst[0]
     else:
         num = lst[0]
