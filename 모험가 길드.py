@@ -1,16 +1,14 @@
 n = int(input())
 lst = list(map(int, input().split()))
 
-lst.sort(reverse=True)
+lst.sort()
 count = 0
-while True:
-    if lst == []:
-        break
-    elif lst[0] > len(lst):
-        del lst[0]
-    else:
-        num = lst[0]
-        del lst[0:num]
-        count += 1
+result = 0
+
+for i in lst:
+    count += 1
+    if count >= i:
+        result += 1
+        count = 0
   
-print(count)
+print(result)
