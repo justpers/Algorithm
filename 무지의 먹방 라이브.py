@@ -1,34 +1,23 @@
+import heapq
 def solution(food_times, k):
-    while k > 0:
-        answer = 0
-        for i in range(len(food_times)):
-            if food_times[i] > 0:
-                food_times[i] -= 1
-                k -= 1
-                answer = i + 1
-        if answer == 0:
-            break
+    if sum(food_times) <= k:
+        return -1
     
-    if answer == 0:
-        answer = -1
-    else:
-        if answer >= len(food_times):
-            answer -= len(food_times)    
-            
-        for j in range(answer, len(food_times)):
-            if food_times[j] == 0:
-                continue
-            else:
-                answer = j
-                break
-            
-        if food_times[answer] == 0:
-            for k in range(0, answer):
-                if food_times[k] == 0:
-                    continue
-                else:
-                    answer = k
-                    break
-        answer += 1
+    #시간이 작은 음식부터 빼야 하므로 우선순위 큐 이용
+    q = []
+    for i in range(len(food_times)):
+        heapq.heappush(q, (food_times[i], i +1))
     
-    return answer
+    sum_value = 0 # 먹기 위해 사용한 시간
+    previous = 0 # 직전에 다 먹은 음식 시간
+    
+    length = len(food_times) # 남은 음식의 개수
+    
+    while sum_value + ((q[0][0] - previous) * length) <= k:
+        now = heapq.heappop(q)[0]
+        sum_value += (now - previous) * length
+        length -= 1
+        previous = now
+    
+    result = sorted(q, key = lambda x: x[1])
+    return result[(k-sum_value) % length][1]
