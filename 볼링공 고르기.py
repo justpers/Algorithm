@@ -1,17 +1,22 @@
+# n, m = map(int, input().split())
+# weight = list(map(int, input().split()))
+
+# count = 0
+
+# for i in range(n):
+#     for j in range(i+1, n):
+#         if weight[i] != weight[j]:
+#             count += 1
+# print(count)
+
+
 n, m = map(int, input().split())
 weight = list(map(int, input().split()))
 
-count = 0
-
-for i in range(n):
-    for j in range(i+1, n):
-        if weight[i] != weight[j]:
-            count += 1
-print(count)
-
-
-
-# 조합하고 무게 같게 고를 경우 빼기
-
-# 1 2 2 3 3
-# 무게 같을 땐 패스하고 다르면 count+1
+lst = [0] * 11
+for i in weight:
+    lst[i] += 1
+result = 0
+for i in range(1, m+1):
+    n -= lst[i] # 무게가 i인 볼링공의 개수(A가 선택할 수 있는 개수) 제외
+    result += lst[i] * n # B가 선택하는 경우의 수와 곱하기
