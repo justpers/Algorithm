@@ -5,7 +5,11 @@ def solution(N, stages):
     for i in range(1, N+1):
         not_clear = stages.count(i)
         clear = len(list(filter(lambda x: x >= i, stages)))
-        per = not_clear / clear
+        
+        if clear == 0:
+            per = 0
+        else:
+            per = not_clear / clear
         
         answer.append((i, per))
     answer = sorted(answer, key=lambda x: x[1], reverse=True)
@@ -13,3 +17,4 @@ def solution(N, stages):
         answer[i] = answer[i][0]
     
     return answer
+
