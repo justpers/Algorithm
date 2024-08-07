@@ -15,7 +15,7 @@ for i in range(l):
 
 row = 0
 col = 0
-time = 1 #뱀이 (0, 0) 위치에 있을 때는 이미 1초가 지난 시점
+time = 0
 
 # 동남서북
 dx = [0, 1, 0, -1]
@@ -23,16 +23,18 @@ dy = [1, 0, -1, 0]
 look = 0 # 뱀이 초기에 바라보고 있는 방향: 동쪽
 
 while True:
-    time += 1
-    if int(direct[0][0]) == time:
-        if direct[0][1] == 'D':
-            look = (look + 1) % 4
-        else:
-            look = (look - 1) % 4
-            
-    row += dx[look]
-    col += dy[look]
-    if row < 0 or row >= n or col < 0 or col >= n:
-        break          
+    if len(direct) >= 1:
+        if int(direct[0][0]) == time:
+            if direct[0][1] == 'D':
+                look = (look + 1) % 4
+            else:
+                look = (look - 1) % 4
+            del direct[0]
+        time += 1
+        
+        row += dx[look]
+        col += dy[look]
+        if row < 0 or row >= n or col < 0 or col >= n:
+            break          
 
 print(time)
