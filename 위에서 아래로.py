@@ -3,4 +3,6 @@ lst = []
 for i in range(n):
     lst.append(int(input()))
     
-print(lst.sort(reverse=False))
+array = sorted(lst, reverse=True)
+for i in array:
+    print(i, end=' ')
