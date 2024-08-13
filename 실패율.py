@@ -17,4 +17,3 @@ def solution(N, stages):
         answer[i] = answer[i][0]
     
     return answer
-
