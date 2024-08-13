@@ -1,38 +1,26 @@
-def binary_search(array, count, start, end):
-    result = []
-    while start <= end:
-        mid = (start + end) // 2
-        if count >= 1:
-            result.append(array[mid])
-            count -= 1
-            
-            if array[end] - array[mid] > array[mid] - array[start]:
-                start = mid + 1
-            else:
-                end = mid - 1
-        else:
-            return result
-    return result
-
-n, c = map(int, input().split())
+n, c = list(map(int, input().split()))
 array = []
-for i in range(n):
+for _ in range(n):
     array.append(int(input()))
-
 array.sort()
-if c == 2:
-    print(array[-1] - array[0])
-else:
-    result_lst = binary_search(array, c-2, 0, n - 1)
-    result_lst.append(array[0])
-    result_lst.append(array[-1])
-    
-    result_lst.sort()
 
-    min_value = result_lst[1] - result_lst[0]
-    for i in range(len(result_lst) - 1):
-        for j in range(i+1, len(result_lst) - 1):
-            if result_lst[j] - result_lst[i] < min_value:
-                min_value = result_lst[j] - result_lst[i]
+start = 1 # 가능한 최소 거리
+end = array[-1] - array[0] # 가능한 최대 거리
+result = 0
+
+while(start <= end):
+    mid = (start + end) // 2 # mid는 가장 인접한 두 공유기 사이의 거리를 의미
+    value = array[0]
+    count = 1
     
-    print(min_value)
+    # 현재의 mid 값을 이용해 공유기를 설치
+    for i in range(1, n):
+        if array[i] >= value + mid:
+            value = array[i]
+            count += 1
+    if count >= c:
+        start = mid + 1
+        result = mid # 최적의 결과 저장
+    else: # c개 이상의 공유기를 설치핤 수 없는 경우 거리를 감소
+        end = mid - 1
+print(result)
