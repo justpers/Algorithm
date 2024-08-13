@@ -3,7 +3,7 @@ def binary_search(array, count, start, end):
     while start <= end:
         mid = (start + end) // 2
         if count >= 1:
-            result.append(mid)
+            result.append(array[mid])
             count -= 1
             
             if array[end] - array[mid] > array[mid] - array[start]:
@@ -28,10 +28,11 @@ else:
     result_lst.append(array[-1])
     
     result_lst.sort()
-    min = 0
+
+    min_value = result_lst[1] - result_lst[0]
     for i in range(len(result_lst) - 1):
-        for j in range(i, len(result_lst) - 1):
-            if result_lst[j] - result_lst[i] < min:
-                min = result_lst[j] - result_lst[i]
+        for j in range(i+1, len(result_lst) - 1):
+            if result_lst[j] - result_lst[i] < min_value:
+                min_value = result_lst[j] - result_lst[i]
     
-    print(min)
+    print(min_value)
