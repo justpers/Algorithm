@@ -1,23 +1,21 @@
 n, m = map(int, input().split())
 length = list(map(int, input().split()))
-length.sort()
 
-# 이진탐색하면서, 중간점을 절단기 높이로 설정했을 때
-# 손님 요청보다 떡이 부족하면 중간점을 왼쪽으로, 반대면 오른족으로 옮기기
+# 제일 길이가 긴 떡의 시작점과 끝점으로 이진탐색 하기
+start = 0
+end = max(length)
 
-# 10 15 17 19
-def length_binary_search(array, target, start, end):
-    result = 0
+result = 0
+while(start <= end):
+    total = 0
     mid = (start + end) // 2
-    for i in range(mid, end):
-        result += (array[i] - array[mid])
-    
-    if result == target:
-        return mid
-    elif result < target:
-        return length_binary_search(array, target, start, mid - 1)
+    for i in length:
+        if i > mid:
+            total += (i - mid)
+    if total < m:
+        end = mid - 1
     else:
-        return length_binary_search(array, target, mid + 1, end)
+        result = mid
+        start = mid + 1
         
-
-length_binary_search(length, m, 0, n - 1)
+print(result)
