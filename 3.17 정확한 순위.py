@@ -13,7 +13,7 @@ for a in range(1, n+1):
 
 # 각 간선에 대한 정보를 입력받아, 그 값으로 초기화
 for _ in range(m):
-    # A에서 B로 가는 비용이 1
+    # A에서 B로 가는 비용이 1s
     a, b = map(int, input().split())
     graph[a][b] = 1
     
@@ -34,4 +34,3 @@ for a in range(1, n+1):
     if count == n:
         result += 1
 print(result)
-            
